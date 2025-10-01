@@ -7,6 +7,7 @@ import Card from './components/Card/Card';
 import product1 from './assets/images/product1.jpg'
 import product2 from './assets/images/product2.jpg'
 import product3 from './assets/images/product3.jpg'
+import Blog from './pages/Blog';
 
 
 function App() {
@@ -43,6 +44,8 @@ function App() {
               }
             />
             <Route path="/shop" element={<Shop />} />
+            <Route path="/blog" element={<Blog/>} />
+
           </Routes>
           <Footer />
       </BrowserRouter>
