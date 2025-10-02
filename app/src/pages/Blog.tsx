@@ -3,6 +3,8 @@ import type { Post } from "../types/blog";
 import { fetchPosts } from "../services/blogService";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import  Loader  from "../components/Loader/Loader";
+
 
 import {
   Container,
@@ -79,7 +81,14 @@ const Blog: React.FC = () => {
   };
 
   
-  if (loading) return <p>Loading</p>;
+    if (loading) {
+    return (
+      <Loader
+        message="Loading blog posts..."
+        details="We’re contacting the API and preparing posts. It usually takes a few seconds."
+      />
+    );
+  }
   if (error) return <p>ERROR: {error}</p>;
 
   return (
