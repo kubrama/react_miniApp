@@ -8,6 +8,8 @@ import product1 from './assets/images/product1.jpg'
 import product2 from './assets/images/product2.jpg'
 import product3 from './assets/images/product3.jpg'
 import Blog from './pages/Blog';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
@@ -49,6 +51,7 @@ function App() {
           </Routes>
           <Footer />
       </BrowserRouter>
+      <ToastContainer position="top-right" autoClose={3000} />
     </>
   )
 }
