@@ -10,6 +10,7 @@ import product3 from './assets/images/product3.jpg'
 import Blog from './pages/Blog';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import About from './pages/About';
 
 
 function App() {
@@ -47,6 +48,8 @@ function App() {
             />
             <Route path="/shop" element={<Shop />} />
             <Route path="/blog" element={<Blog/>} />
+            <Route path="/about" element={<About/>} />
+
 
           </Routes>
           <Footer />
