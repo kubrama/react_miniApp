@@ -11,6 +11,11 @@ import Blog from './pages/Blog';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import About from './pages/About';
+import Contact  from './pages/Contact';
+import Login from './pages/Login';
+import  Home  from './pages/Home';
+import  AuthProvider  from "./context/AuthProvider";
+
 
 
 function App() {
@@ -22,6 +27,7 @@ function App() {
   ];
   return (
     <>
+    <AuthProvider>
       <BrowserRouter>
           <Header />
           <Routes>
@@ -46,14 +52,16 @@ function App() {
                 </div>
               }
             />
+            <Route path="/home" element={<Home/>} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/blog" element={<Blog/>} />
             <Route path="/about" element={<About/>} />
-
-
+            <Route path="/contact" element={<Contact/>} />
+            <Route path="/account" element={<Login/>} />
           </Routes>
           <Footer />
       </BrowserRouter>
+      </AuthProvider>
       <ToastContainer position="top-right" autoClose={3000} />
     </>
   )
