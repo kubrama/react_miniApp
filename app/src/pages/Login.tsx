@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { useForm } from "react-hook-form";
-import type { SubmitHandler } from "react-hook-form";
+import React from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../redux/slices/authSlice";
 
 import {
   Container,
@@ -16,7 +16,6 @@ import {
   ErrorText,
 } from "../assets/css/Login.styled";
 
-
 const loginSchema = yup.object({
   email: yup.string().required("Email is required").email("Enter a valid email"),
   password: yup.string().required("Password is required").min(6, "Min 6 symbols"),
@@ -26,7 +25,7 @@ type LoginInputs = yup.InferType<typeof loginSchema>;
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -36,35 +35,27 @@ const Login: React.FC = () => {
     resolver: yupResolver(loginSchema),
   });
 
- 
-  const fakeLoginRequest = async (email: string, password: string) => {
-    return new Promise<{ token: string }>((resolve, reject) => {
-      setTimeout(() => {
-        if (email === "test@mail.com" && password === "123456") {
-          resolve({ token: "fake-jwt-token-123" });
-        } else {
-          reject(new Error("Invalid email or password"));
-        }
-      }, 1000);
-    });
-  };
-
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
     try {
-      const res = await fakeLoginRequest(data.email, data.password);
-      localStorage.setItem("token", res.token);
-      login(data.email);
+      if (data.email === "test@mail.com" && data.password === "123456") {
+        const token = "fake-jwt-token-123";
+        dispatch(loginSuccess({ token, email: data.email }));
 
-      await Swal.fire({
-        icon: "success",
-        title: "Login successful",
-        text: "You are now logged in!",
-      });
+        await Swal.fire({
+          icon: "success",
+          title: "Login successful",
+          text: "Welcome back!",
+          timer: 2000,
+          showConfirmButton: false,
+        });
 
-      navigate("/"); 
+        navigate("/");
+      } else {
+        throw new Error("Invalid email or password");
+      }
     } catch (error: unknown) {
-      let message = "Something went wrong";
-      if (error instanceof Error) message = error.message;
+      const message =
+        error instanceof Error ? error.message : "Something went wrong";
 
       await Swal.fire({
         icon: "error",
@@ -77,6 +68,7 @@ const Login: React.FC = () => {
   return (
     <Container>
       <Title>Login</Title>
+
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label>
           Email:

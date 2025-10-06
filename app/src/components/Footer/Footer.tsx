@@ -1,14 +1,19 @@
 import logo from '../../assets/images/logo.png'
 import "../Footer/Footer.css"
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
 
 const Footer = () => {
     return (
         <footer>
             <div className="logo">
-                <img src={logo} alt="" />
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab, asperiores.</p>
+                <NavLink to="/">
+                    <img src={logo} alt="Logo" />
+                </NavLink>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab, asperiores.
+                </p>
                 <div className="icons">
                     <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
                         <FaFacebook size={24} className="text-blue-600" />
@@ -21,20 +26,21 @@ const Footer = () => {
                     </a>
                 </div>
             </div>
+
             <div className="categories">
                 <h3>Categories</h3>
-                <a href="">Road Bikes</a>
-                <a href="">Mountain Bikes</a>
-                <a href="">Hybryd Bikes</a>
-                <a href="">Cycloros Bikes</a>
-
+                <NavLink to="/road-bikes">Road Bikes</NavLink>
+                <NavLink to="/mountain-bikes">Mountain Bikes</NavLink>
+                <NavLink to="/hybrid-bikes">Hybrid Bikes</NavLink>
+                <NavLink to="/cyclocross-bikes">Cyclocross Bikes</NavLink>
             </div>
+
             <div className="overviews">
                 <h3>Overviews</h3>
-                <a href="">Home</a>
-                <a href="">Shop</a>
-                <a href="">About</a>
-                <a href="">Contact</a>
+                <NavLink to="/">Home</NavLink>
+                <NavLink to="/shop">Shop</NavLink>
+                <NavLink to="/about">About</NavLink>
+                <NavLink to="/contact">Contact</NavLink>
             </div>
         </footer>
     )

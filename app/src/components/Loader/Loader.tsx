@@ -22,7 +22,7 @@ const Loader: React.FC<LoadingProps> = ({
             </div>
 
             <Disclosure.Button className="disclosure-button">
-              {open ? "Hide details ▲" : "Show details ▼"}
+              {open ? "Hide details" : "Show details"}
             </Disclosure.Button>
 
             <Disclosure.Panel className="disclosure-panel">
